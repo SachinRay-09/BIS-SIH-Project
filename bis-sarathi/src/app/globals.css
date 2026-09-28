@@ -1,0 +1,86 @@
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
+
+@layer base {
+  :root {
+    /* BIS Sarathi colour tokens */
+    --bis-primary:        #1B2A4A;
+    --bis-accent:         #FF671F;
+    --bis-background:     #F8F9FA;
+    --bis-surface:        #FFFFFF;
+    --bis-border:         #E2E8F0;
+    --bis-text-primary:   #1A1A2E;
+    --bis-text-secondary: #64748B;
+    --bis-success:        #15803D;
+    --bis-warning:        #B45309;
+    --bis-abstain:        #7C3AED;
+    --bis-lims:           #1D4ED8;
+    --bis-synthetic:      #64748B;
+
+    /* shadcn/ui tokens */
+    --background: 0 0% 98%;
+    --foreground: 222 47% 11%;
+    --card: 0 0% 100%;
+    --card-foreground: 222 47% 11%;
+    --popover: 0 0% 100%;
+    --popover-foreground: 222 47% 11%;
+    --primary: 220 63% 20%;
+    --primary-foreground: 0 0% 98%;
+    --secondary: 214 32% 91%;
+    --secondary-foreground: 222 47% 11%;
+    --muted: 214 32% 91%;
+    --muted-foreground: 215 16% 47%;
+    --accent: 24 100% 50%;
+    --accent-foreground: 0 0% 100%;
+    --destructive: 0 84% 60%;
+    --destructive-foreground: 0 0% 98%;
+    --border: 214 32% 91%;
+    --input: 214 32% 91%;
+    --ring: 220 63% 20%;
+    --radius: 0.5rem;
+  }
+
+  .dark {
+    --background: 222 47% 11%;
+    --foreground: 0 0% 98%;
+    --card: 222 47% 14%;
+    --card-foreground: 0 0% 98%;
+    --popover: 222 47% 14%;
+    --popover-foreground: 0 0% 98%;
+    --primary: 0 0% 98%;
+    --primary-foreground: 222 47% 11%;
+    --secondary: 215 28% 17%;
+    --secondary-foreground: 0 0% 98%;
+    --muted: 215 28% 17%;
+    --muted-foreground: 215 20% 65%;
+    --accent: 24 100% 50%;
+    --accent-foreground: 0 0% 100%;
+    --destructive: 0 62% 30%;
+    --destructive-foreground: 0 0% 98%;
+    --border: 215 28% 17%;
+    --input: 215 28% 17%;
+    --ring: 0 0% 98%;
+  }
+
+  * {
+    @apply border-border;
+  }
+
+  body {
+    @apply bg-background text-foreground;
+  }
+}
+
+/* Presentation mode overrides */
+[data-presentation="true"] .nav-secondary {
+  display: none;
+}
+
+[data-presentation="true"] body {
+  font-size: 1.125rem;
+}
+
+[data-presentation="true"] .card {
+  padding: 1.5rem;
+}
