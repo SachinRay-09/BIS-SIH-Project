@@ -7,10 +7,17 @@ export const metadata: Metadata = {
     'Ask about BIS standards, labs, certification, complaints, and licence verification.',
 }
 
-export default function AskPage() {
+interface AskPageProps {
+  searchParams: Promise<{ q?: string }>
+}
+
+export default async function AskPage({ searchParams }: AskPageProps) {
+  const { q } = await searchParams
+  const initialQuery = q ? decodeURIComponent(q) : undefined
+
   return (
     <div className="flex flex-col h-full overflow-hidden">
-      <ChatInterface />
+      <ChatInterface initialQuery={initialQuery} />
     </div>
   )
 }

@@ -32,9 +32,16 @@ export default function RootLayout({
         className={`h-screen flex flex-col bg-white antialiased overflow-hidden ${inter.className}`}
       >
         <AppContextProvider>
+          {/* J.2 — Skip to main content for keyboard/screen-reader navigation */}
+          <a
+            href="#main-content"
+            className="sr-only focus:not-sr-only focus:absolute focus:top-2 focus:left-2 focus:z-50 focus:px-4 focus:py-2 focus:rounded focus:bg-[#1B2A4A] focus:text-white focus:text-sm focus:font-semibold focus:shadow-lg"
+          >
+            Skip to main content
+          </a>
           <DemoBanner />
           <NavBar />
-          <main className="flex-1 min-h-0 overflow-y-auto">{children}</main>
+          <main id="main-content" className="flex-1 min-h-0 overflow-y-auto">{children}</main>
           <Footer />
         </AppContextProvider>
       </body>

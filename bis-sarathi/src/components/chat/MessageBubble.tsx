@@ -127,7 +127,15 @@ function AssistantCards({ message }: { message: ChatMessage }) {
     case 'COMPLAINT_DRAFT': {
       const fields = pr.complaintFields ?? []
       return (
-        <div className="mt-3 w-full">
+        <div className="mt-3 w-full flex flex-col gap-2">
+          {/* A.3: Clarification needed banner — MEDIUM confidence */}
+          <div className="flex items-start gap-2 rounded-md border border-[#F59E0B] bg-[#FFFBEB] px-3 py-2.5">
+            <span className="text-[#B45309] text-sm mt-0.5 flex-shrink-0" aria-hidden="true">⚠</span>
+            <p className="text-xs text-[#92400E] leading-relaxed">
+              <span className="font-semibold">Clarification needed — </span>
+              This response is partially grounded. Missing complaint fields must be provided before the draft can be completed. Review all extracted fields below.
+            </p>
+          </div>
           <ComplaintDraftCard fields={fields} />
         </div>
       )
@@ -136,7 +144,15 @@ function AssistantCards({ message }: { message: ChatMessage }) {
     case 'VERIFICATION_RESULT': {
       if (!pr.verificationResult) return null
       return (
-        <div className="mt-3 w-full">
+        <div className="mt-3 w-full flex flex-col gap-2">
+          {/* A.3: Clarification needed banner — MEDIUM confidence (demo record only) */}
+          <div className="flex items-start gap-2 rounded-md border border-[#F59E0B] bg-[#FFFBEB] px-3 py-2.5">
+            <span className="text-[#B45309] text-sm mt-0.5 flex-shrink-0" aria-hidden="true">⚠</span>
+            <p className="text-xs text-[#92400E] leading-relaxed">
+              <span className="font-semibold">Demo record only — </span>
+              This result is not connected to the BIS production registry. Confidence is limited to the demo dataset. Verify the real licence status at the official BIS portal.
+            </p>
+          </div>
           <VerificationResult result={pr.verificationResult} />
         </div>
       )

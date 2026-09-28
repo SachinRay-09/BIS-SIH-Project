@@ -16,6 +16,8 @@
 // This is a server component — no 'use client' directive needed.
 // Requirements: 10.1, 10.2, 10.3
 
+import Link from 'next/link'
+
 // ─────────────────────────────────────────────────────────────────────────────
 // Component
 // ─────────────────────────────────────────────────────────────────────────────
@@ -66,7 +68,7 @@ export function AbstentionResponse({ message, reasons }: AbstentionResponseProps
             Red/orange badge (#DC2626 bg, white text) per task specification.
             Distinct from the purple accent — signals the verification outcome clearly.
         ────────────────────────────────────────────────────────────────────── */}
-        <div className="flex items-center gap-2">
+        <div className="flex items-center gap-2 flex-wrap">
           <span
             style={{ backgroundColor: '#DC2626', color: '#FFFFFF' }}
             className="inline-block text-[11px] font-bold uppercase tracking-widest px-2.5 py-1 rounded"
@@ -74,10 +76,18 @@ export function AbstentionResponse({ message, reasons }: AbstentionResponseProps
           >
             Unable to Verify
           </span>
+          {/* H.2 — Grounding score notice */}
+          <span className="inline-flex items-center gap-1 text-[10px] font-bold uppercase tracking-widest px-2 py-0.5 rounded-full bg-[#FEE2E2] text-[#B91C1C]">
+            LOW · 0%
+          </span>
           <span className="sr-only">
             Sarathi was unable to verify this query from the available BIS evidence.
           </span>
         </div>
+        {/* H.2 — one-line grounding reason */}
+        <p className="text-xs text-[#B91C1C]">
+          No matching evidence found in the available BIS dataset for this query.
+        </p>
 
         {/* ── Main message — displayed prominently ──────────────────────────
             Requirements: 10.2
@@ -127,7 +137,7 @@ export function AbstentionResponse({ message, reasons }: AbstentionResponseProps
             Requirements: 10.4
             External link to https://www.bis.gov.in — opens in new tab.
         ────────────────────────────────────────────────────────────────────── */}
-        <div>
+        <div className="flex flex-wrap items-center gap-4">
           <a
             href="https://www.bis.gov.in"
             target="_blank"
@@ -137,10 +147,18 @@ export function AbstentionResponse({ message, reasons }: AbstentionResponseProps
             className="inline-flex items-center gap-1.5 text-sm font-semibold hover:text-[#FF671F] transition-colors duration-150 focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-[#1B2A4A] focus-visible:ring-offset-1 rounded"
           >
             Visit official BIS portal
-            {/* Arrow indicator — part of the visible label per design spec */}
             <span aria-hidden="true">→</span>
             <span className="sr-only">(opens in new tab)</span>
           </a>
+          {/* H.1 — Follow-up CTA to complaint preparation */}
+          <Link
+            href="/ask?q=I+want+to+complain+about+a+product+carrying+an+ISI+mark."
+            style={{ color: '#7C3AED' }}
+            className="inline-flex items-center gap-1.5 text-sm font-semibold hover:opacity-80 transition-opacity duration-150 focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-[#7C3AED] focus-visible:ring-offset-1 rounded"
+            aria-label="Help me prepare a complaint or verification request"
+          >
+            Help me prepare a request →
+          </Link>
         </div>
 
       </div>

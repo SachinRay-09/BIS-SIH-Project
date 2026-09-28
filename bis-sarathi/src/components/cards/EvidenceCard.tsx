@@ -64,7 +64,8 @@ export function EvidenceCard({ record }: EvidenceCardProps) {
     >
       {/* ── Row 1: identifier + record type + source badge ─────────────────── */}
       <div className="flex flex-wrap items-center gap-2">
-        <span className="font-semibold text-[#1A1A2E] text-sm leading-tight">
+        {/* J.1 — lang="en" ensures IS numbers are read correctly by screen readers */}
+        <span lang="en" className="font-semibold text-[#1A1A2E] text-sm leading-tight">
           {record.standardOrRecord}
         </span>
         <span className="text-xs text-[#64748B]">{record.recordType}</span>

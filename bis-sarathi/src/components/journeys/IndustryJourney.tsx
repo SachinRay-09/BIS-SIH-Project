@@ -54,6 +54,11 @@ const DEMO_CANDIDATE_STANDARDS: CandidateStandard[] = [
       'Certification scheme match: CRS applies — ISI mark required for sale in India',
       'BIS source record: official public-source snapshot retrieved 28 Sep 2026',
     ],
+    applicabilityStatus: 'verified',
+    clarificationsNeeded: [
+      'Confirm the intended container capacity range (e.g. 200 ml pouches vs 20 L jars may have different packaging requirements)',
+      'Confirm whether the product is natural mineral water — if yes, IS 13428 applies instead of IS 14543',
+    ],
   },
   {
     standardId: 'IS-14543-2016',
@@ -68,11 +73,30 @@ const DEMO_CANDIDATE_STANDARDS: CandidateStandard[] = [
       'Surfaced to demonstrate version-awareness for manufacturers with existing certification',
       'Version metadata available: both 2024 and 2016 records found in the evidence dataset',
     ],
+    applicabilityStatus: 'candidate',
+    clarificationsNeeded: [
+      'Confirm whether your current BIS licence was issued under the 2016 revision — if so, check with BIS whether re-testing is required under the 2024 edition',
+    ],
   },
 ]
 
 // Evidence record IDs to display for IS 14543
 const IS_14543_EVIDENCE_IDS = ['EVD-STD-IS14543-2024', 'EVD-STD-IS14543-2016']
+
+// D.1 — Product attribute schema (SIH v2 § 8.2)
+const DEMO_PRODUCT_ATTRIBUTES = [
+  { label: 'Product type', value: 'Packaged Drinking Water' },
+  { label: 'Material', value: 'PET / HDPE / Polycarbonate containers' },
+  { label: 'Intended use', value: 'Direct human consumption' },
+  { label: 'Market context', value: 'Retail sale in India — mandatory certification' },
+  { label: 'HSN code', value: '2201 (Waters, not sweetened/flavoured)' },
+]
+
+// D.2 — Clarifications still needed (seeded)
+const WHAT_STILL_NEEDED = [
+  'Confirm container capacity range (e.g. 200 ml pouches vs 20 L jars)',
+  'Confirm whether the product is natural mineral water (if yes, IS 13428 applies)',
+]
 
 // Regulatory guidance sourced only from seeded data — no fabricated clause numbers
 const CERTIFICATION_GUIDANCE = {
@@ -299,11 +323,54 @@ export function IndustryJourney() {
               {/* Product Understanding */}
               <ProductUnderstandingCard data={DEMO_PRODUCT_UNDERSTANDING} />
 
+              {/* D.1 — Product attribute schema card */}
+              <div className="bg-white border border-[#E2E8F0] rounded-md p-4">
+                <p className="text-[10px] font-semibold uppercase tracking-widest text-[#64748B] mb-3">
+                  Extracted product attributes
+                </p>
+                <dl className="grid grid-cols-1 sm:grid-cols-2 gap-x-6 gap-y-2">
+                  {DEMO_PRODUCT_ATTRIBUTES.map(({ label, value }) => (
+                    <div key={label} className="flex flex-col gap-0.5">
+                      <dt className="text-[10px] font-semibold uppercase tracking-widest text-[#94A3B8]">{label}</dt>
+                      <dd className="text-xs text-[#334155]">{value}</dd>
+                    </div>
+                  ))}
+                </dl>
+              </div>
+
+              {/* D.3 — Mandatory vs Candidate notice */}
+              <div className="rounded-md border border-[#DBEAFE] bg-[#EFF6FF] px-4 py-3 text-xs text-[#1D4ED8]">
+                <p className="font-semibold mb-1">Understanding applicability labels</p>
+                <ul className="flex flex-col gap-1">
+                  <li><span className="font-semibold text-[#15803D]">Verified applicable</span> — confirmed match with evidence; CRS mandatory for this product.</li>
+                  <li><span className="font-semibold text-[#1D4ED8]">Candidate</span> — semantically similar; requires verification before acting on it.</li>
+                  <li><span className="font-semibold text-[#854D0E]">Uncertain</span> — weak or conflicting signals; treat with caution and consult BIS directly.</li>
+                </ul>
+                <p className="mt-1.5 text-[#1D4ED8] opacity-70">
+                  "Candidate standard" is not the same as "legally applicable standard." Evidence decides.
+                </p>
+              </div>
+
               {/* Candidate Standard cards */}
               <div className="flex flex-col gap-3">
                 {DEMO_CANDIDATE_STANDARDS.map((std) => (
                   <CandidateStandardCard key={std.standardId} standard={std} />
                 ))}
+              </div>
+
+              {/* D.2 — What I still need (page-level summary) */}
+              <div className="rounded-md border border-[#FDE68A] bg-[#FFFBEB] px-4 py-3">
+                <p className="text-[10px] font-semibold uppercase tracking-widest text-[#B45309] mb-2">
+                  What I still need to fully ground this recommendation
+                </p>
+                <ul className="flex flex-col gap-1.5">
+                  {WHAT_STILL_NEEDED.map((c) => (
+                    <li key={c} className="flex items-start gap-2 text-xs text-[#92400E]">
+                      <span className="mt-0.5 flex-shrink-0" aria-hidden="true">?</span>
+                      <span>{c}</span>
+                    </li>
+                  ))}
+                </ul>
               </div>
             </div>
           </section>

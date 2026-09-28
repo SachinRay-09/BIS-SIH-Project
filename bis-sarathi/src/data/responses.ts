@@ -47,6 +47,11 @@ const drinkingWaterCandidates: CandidateStandard[] = [
       'Current revision: 2024 edition is the in-force standard',
       'Certification scheme match: CRS applies — ISI mark required for sale in India',
     ],
+    applicabilityStatus: 'verified',
+    clarificationsNeeded: [
+      'Confirm the intended container capacity range (e.g. 200 ml pouches vs 20 L jars may have different packaging requirements)',
+      'Confirm whether the product is natural mineral water — if yes, IS 13428 applies instead of IS 14543',
+    ],
   },
   {
     standardId: 'IS-14543-2016',
@@ -60,6 +65,10 @@ const drinkingWaterCandidates: CandidateStandard[] = [
     matchReasons: [
       'Same product category as IS 14543:2024 — prior revision, now superseded',
       'Surfaced to demonstrate version-awareness for manufacturers with existing certification under 2016 edition',
+    ],
+    applicabilityStatus: 'candidate',
+    clarificationsNeeded: [
+      'Confirm whether your current BIS licence was issued under the 2016 revision — if so, check with BIS whether re-testing is required under the 2024 edition',
     ],
   },
 ]

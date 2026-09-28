@@ -344,18 +344,18 @@ Tasks are grouped by area and ordered by demo/judge impact.
 
 ### A. Confidence & Grounding Model
 
-- [ ] A.1 Expand confidence score breakdown in ServiceTracePanel
+- [x] A.1 Expand confidence score breakdown in ServiceTracePanel
   - Currently shows a single `confidenceScore` number (0–100). Expand to show the component scores from the v2 grounding model:
     - Retrieval relevance, Source authority, Entity identifier match, Evidence coverage, Freshness/version validity, Cross-source agreement, Ambiguity penalty
   - Render as a mini breakdown table inside the expanded pipeline trace panel
   - _Ref: SIH v2 § 12.1 Proposed grounding score_
 
-- [ ] A.2 Show confidence state label alongside score in ServiceTracePanel
+- [x] A.2 Show confidence state label alongside score in ServiceTracePanel
   - HIGH (≥80) / MEDIUM (50–79) / LOW (<50) labels already shown in MessageBubble badge
   - Also show them in the pipeline trace panel with a one-line rationale per state
   - _Ref: SIH v2 § 12.2 Output states_
 
-- [ ] A.3 Add "Clarification needed" state to COMPLAINT and VERIFICATION responses
+- [x] A.3 Add "Clarification needed" state to COMPLAINT and VERIFICATION responses
   - COMPLAINT (score 71) and VERIFY (score 55) are MEDIUM — they should explicitly show a "Needs clarification" notice in the response rather than just showing the card
   - Add a yellow notice banner: "This response requires additional information before it can be fully grounded"
   - _Ref: SIH v2 § 12.2, § 4.2 Consumer persona_
@@ -364,19 +364,19 @@ Tasks are grouped by area and ordered by demo/judge impact.
 
 ### B. Standards Recommendation Engine
 
-- [ ] B.1 Add `applicabilityStatus` field to CandidateStandard and display it on CandidateStandardCard
+- [x] B.1 Add `applicabilityStatus` field to CandidateStandard and display it on CandidateStandardCard
   - Values: `"candidate"` | `"verified"` | `"uncertain"`
   - IS 14543:2024 → `"verified"` (exact product-category match, CRS mandatory)
   - IS 14543:2016 → `"candidate"` (superseded; surfaced for version awareness)
   - Render as a coloured badge: verified=green, candidate=blue, uncertain=amber
   - _Ref: SIH v2 § 8.3 Output contract_
 
-- [ ] B.2 Add `clarificationsNeeded` field to CandidateStandard
+- [x] B.2 Add `clarificationsNeeded` field to CandidateStandard
   - IS 14543:2024 example: `["confirm intended capacity range", "confirm whether natural mineral water is excluded"]`
   - Render as a "What I still need" section below matchReasons in CandidateStandardCard
   - _Ref: SIH v2 § 8.3, § 4.1 Industry flow_
 
-- [ ] B.3 Add a "Certification route" card to the Industry journey response
+- [x] B.3 Add a "Certification route" card to the Industry journey response
   - Show: Scheme (CRS), Mark (ISI), Mandatory/Voluntary, Required testing path
   - Source purely from seeded data — no fabricated clause numbers
   - _Ref: SIH v2 § 4.1, § 8.3 certificationRoute field_
@@ -385,7 +385,7 @@ Tasks are grouped by area and ordered by demo/judge impact.
 
 ### C. Home Page & Navigation UX
 
-- [ ] C.1 Revamp Home page hero to match SIH v2 § 30 Recommended Product UI
+- [x] C.1 Revamp Home page hero to match SIH v2 § 30 Recommended Product UI
   - Replace current generic CTA buttons with four direct action tiles:
     - "Find my standard" → `/industry`
     - "Understand certification" → `/industry`
@@ -395,7 +395,7 @@ Tasks are grouped by area and ordered by demo/judge impact.
   - Keep the Government-technology aesthetic — no gradients or AI stock imagery
   - _Ref: SIH v2 § 30_
 
-- [ ] C.2 Add a "Result summary" section on the Home page showing what the last scenario produced
+- [x] C.2 Add a "Result summary" section on the Home page showing what the last scenario produced
   - Visible after a user navigates back from `/ask` — shows a one-line summary of last scenario used
   - Or replace with a "Try a live demo" strip with three scenario buttons directly on the home page
   - _Ref: SIH v2 § 33 Live Demo Script_
@@ -404,18 +404,18 @@ Tasks are grouped by area and ordered by demo/judge impact.
 
 ### D. Industry Journey Page Improvements
 
-- [ ] D.1 Add product attribute schema display to IndustryJourney
+- [x] D.1 Add product attribute schema display to IndustryJourney
   - After "Find Standard" loads, show an extracted attribute card based on SIH v2 § 8.2:
     - product_type, material, intended_use, market_context fields rendered visually
   - Currently only ProductUnderstandingCard is shown; this adds structured attribute extraction context
   - _Ref: SIH v2 § 8.2 Product attribute schema_
 
-- [ ] D.2 Add a "What I still need" section to IndustryJourney result view
+- [x] D.2 Add a "What I still need" section to IndustryJourney result view
   - Seeded clarifications: "confirm container capacity", "confirm whether product is natural mineral water"
   - Rendered as an amber notice card below the candidate standard cards
   - _Ref: SIH v2 § 4.1, Slide 4 result screen_
 
-- [ ] D.3 Add explicit "Mandatory vs Candidate" distinction notice to IndustryJourney
+- [x] D.3 Add explicit "Mandatory vs Candidate" distinction notice to IndustryJourney
   - A small notice box explaining the difference between:
     - **Candidate standard** — semantically similar, requires verification
     - **Verified applicable standard** — confirmed match with evidence
@@ -426,19 +426,19 @@ Tasks are grouped by area and ordered by demo/judge impact.
 
 ### E. How It Works Page Improvements
 
-- [ ] E.1 Add the full 8-stage SIH v2 architecture diagram to the How It Works page
+- [x] E.1 Add the full 8-stage SIH v2 architecture diagram to the How It Works page
   - Currently shows a simplified 8-stage text pipeline
   - Replace/supplement with a styled two-column layout showing the architecture from SIH v2 § 5.1:
     - Left column: USER CHANNELS → LANGUAGE + QUERY UNDERSTANDING → DETERMINISTIC QUERY PLANNER
     - Right column: HYBRID KNOWLEDGE ENGINE and STRUCTURED SERVICE CONNECTORS feeding into EVIDENCE VALIDATION → GROUNDING GATE → RESPONSE LAYER → AUDIT + FEEDBACK LOOP
   - _Ref: SIH v2 § 5.1_
 
-- [ ] E.2 Add "The LLM explains. BIS evidence decides." as the section headline
+- [x] E.2 Add "The LLM explains. BIS evidence decides." as the section headline
   - Currently the page uses the architecture overview heading but not this key positioning line
   - Add it as a prominent pullquote or hero line at the top of the architecture section
   - _Ref: SIH v2 § 5.2, Slide 3_
 
-- [ ] E.3 Add a Source Hierarchy / Data Tier section to How It Works
+- [x] E.3 Add a Source Hierarchy / Data Tier section to How It Works
   - Tier A: Public authoritative BIS sources (Standards portal, BIS LIMS, BIS Care)
   - Tier B: Authorized BIS data (licensed text, authorized APIs — future)
   - Tier C: Supporting external sources (labelled, limited)
@@ -450,12 +450,12 @@ Tasks are grouped by area and ordered by demo/judge impact.
 
 ### F. Consumer Journey Improvements
 
-- [ ] F.1 Add a "Verify ISI mark" entry point to the Consumer page
+- [x] F.1 Add a "Verify ISI mark" entry point to the Consumer page
   - A text field accepting a licence/HUID number that routes to the verification flow
   - Shows the DEMO-LIC-001 result when that ID is entered, abstention for anything else
   - _Ref: SIH v2 § 4.2 Consumer persona, § 10 Verification architecture_
 
-- [ ] F.2 Add "What this IS mark means for you" explainer section to ConsumerJourney
+- [x] F.2 Add "What this IS mark means for you" explainer section to ConsumerJourney
   - After the plain-language explanation card, add a three-point consumer benefit summary:
     1. Product meets minimum safety standards
     2. Manufacturer is BIS-licensed
@@ -466,13 +466,13 @@ Tasks are grouped by area and ordered by demo/judge impact.
 
 ### G. Demo Data Page Improvements
 
-- [ ] G.1 Add a Data Tier classification table to the Demo Data page
+- [x] G.1 Add a Data Tier classification table to the Demo Data page
   - Show all 9 evidence records grouped by tier (Tier A / Tier D) with their sourceType badges
   - Clearly separate official BIS public-source records from mock/synthetic demo records
   - Add a note: "Tier B and Tier C sources would be used in the production version"
   - _Ref: SIH v2 § 6.1, § 28 Demo Data Policy_
 
-- [ ] G.2 Add a freshness/retrieval metadata table to Demo Data page
+- [x] G.2 Add a freshness/retrieval metadata table to Demo Data page
   - For each record: record ID, source, retrieved_at, revision_year, status (current/superseded/mock)
   - _Ref: SIH v2 § 17 Data Freshness and Version Control_
 
@@ -480,11 +480,11 @@ Tasks are grouped by area and ordered by demo/judge impact.
 
 ### H. Trust / Abstention UX
 
-- [ ] H.1 Add a "Would you like help preparing the information needed for verification?" follow-up CTA to AbstentionResponse
+- [x] H.1 Add a "Would you like help preparing the information needed for verification?" follow-up CTA to AbstentionResponse
   - Link to `/ask` with the complaint prompt pre-filled, or show a small inline prompt helper
   - _Ref: SIH v2 § 19 Responsible AI / Safe Failure_
 
-- [ ] H.2 Show a "Grounding score breakdown" notice on abstention responses
+- [x] H.2 Show a "Grounding score breakdown" notice on abstention responses
   - "Confidence: LOW (0/100) — No matching evidence found in the available BIS dataset"
   - Use the red LOW badge already in place, but add a one-line reason below it
   - _Ref: SIH v2 § 12.2_
@@ -499,11 +499,11 @@ Tasks are grouped by area and ordered by demo/judge impact.
   - Simplified `vercel.json` to let Vercel's Next.js framework detection handle routing
   - _Completed: next.config.mjs and vercel.json updated_
 
-- [ ] I.2 Add `output: 'standalone'` to next.config.mjs for optimised Vercel cold starts
+- [x] I.2 Add `output: 'standalone'` to next.config.mjs for optimised Vercel cold starts
   - Reduces deployment bundle size by only including server-required files
   - _Ref: Next.js deployment best practices_
 
-- [ ] I.3 Add `robots.txt` and `sitemap.xml` to `/public/`
+- [x] I.3 Add `robots.txt` and `sitemap.xml` to `/public/`
   - robots.txt: allow all crawlers, link to sitemap
   - sitemap.xml: list all 9 app routes with `lastmod` set to the deployment date
   - Makes the deployed site crawlable and indexable for demo purposes
@@ -512,14 +512,14 @@ Tasks are grouped by area and ordered by demo/judge impact.
 
 ### J. Accessibility & Polish
 
-- [ ] J.1 Add `lang` attribute region switching for screen readers on key label elements
+- [x] J.1 Add `lang` attribute region switching for screen readers on key label elements
   - IS numbers and BIS identifiers should have `lang="en"` to prevent incorrect pronunciation in screen readers if the page is ever used in an Indic language context
 
-- [ ] J.2 Add skip-to-content link at the top of the layout
+- [x] J.2 Add skip-to-content link at the top of the layout
   - `<a href="#main-content" class="sr-only focus:not-sr-only">Skip to main content</a>` before the DemoBanner
   - Required for keyboard-only and screen reader navigation
 
-- [ ] J.3 Add visible focus ring to all interactive cards (EvidenceCard, LabCard, CandidateStandardCard)
+- [x] J.3 Add visible focus ring to all interactive cards (EvidenceCard, LabCard, CandidateStandardCard)
   - Currently hover states exist but cards used as links/buttons may lack a visible focus ring at 2px contrast ratio
   - Add `focus-visible:ring-2 focus-visible:ring-[#1B2A4A]` to all interactive card wrappers
 

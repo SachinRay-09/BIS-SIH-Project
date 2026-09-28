@@ -91,7 +91,7 @@ function nextId(): string {
  * @example
  * <ChatInterface />
  */
-export default function ChatInterface() {
+export default function ChatInterface({ initialQuery }: { initialQuery?: string }) {
   const [messages, setMessages] = useState<ChatMessage[]>([])
   const [input, setInput] = useState('')
   const [isLoading, setIsLoading] = useState(false)
@@ -102,6 +102,7 @@ export default function ChatInterface() {
   const lastMessageRef = useRef<HTMLDivElement>(null)
   const pendingPromptRef = useRef<string | null>(null)
   const pendingForcedPromptIdRef = useRef<PromptId | null>(null)
+  const initialQueryFiredRef = useRef(false)
 
   // ── Focus the last message after it renders ──────────────────────────────
   useEffect(() => {
@@ -114,8 +115,17 @@ export default function ChatInterface() {
     }
   }, [messages])
 
-  // ─────────────────────────────────────────────────────────────────────────
-  // submitPrompt — core submit handler.
+  // ── Auto-submit initialQuery from URL param (from Home page product input) ──
+  useEffect(() => {
+    if (!initialQuery) return
+    // Reset the guard whenever the query changes so navigating to /ask?q=X
+    // then /ask?q=Y from the same mount correctly fires both queries.
+    initialQueryFiredRef.current = false
+    submitPrompt(initialQuery)
+    initialQueryFiredRef.current = true
+    // submitPrompt is stable (useCallback). initialQuery is the only real dep.
+    // eslint-disable-next-line react-hooks/exhaustive-deps
+  }, [initialQuery])
   // Accepts a prompt string, appends the user message, starts loading.
   // The actual response lookup happens in handleLoadingComplete to keep
   // the LoadingSequence fully in charge of timing.

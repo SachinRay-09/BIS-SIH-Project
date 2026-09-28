@@ -105,7 +105,7 @@ export default function DemoDataPage() {
 
       {/* Transparency note */}
       <div
-        className="rounded-lg border border-amber-300 bg-amber-50 p-4 mb-10"
+        className="rounded-lg border border-amber-300 bg-amber-50 p-4 mb-8"
         role="note"
         aria-label="Transparency notice"
       >
@@ -130,6 +130,96 @@ export default function DemoDataPage() {
           records.
         </p>
       </div>
+
+      {/* G.1 — Data Tier classification table */}
+      <section className="mb-10" aria-labelledby="section-tier-table">
+        <h2 id="section-tier-table" className="text-xl font-semibold text-[#1B2A4A] mb-4">
+          Data Tier Classification
+        </h2>
+        <p className="text-sm text-slate-500 mb-4">
+          All sources are explicitly classified. Tier B and Tier C sources would be used in the production version with authorized BIS integrations.
+        </p>
+        <div className="rounded-lg border border-[#E2E8F0] overflow-hidden">
+          <table className="w-full text-sm">
+            <thead className="bg-[#F8F9FA]">
+              <tr>
+                <th scope="col" className="px-4 py-3 text-left text-xs font-semibold uppercase tracking-widest text-[#64748B]">Tier</th>
+                <th scope="col" className="px-4 py-3 text-left text-xs font-semibold uppercase tracking-widest text-[#64748B]">Label</th>
+                <th scope="col" className="px-4 py-3 text-left text-xs font-semibold uppercase tracking-widest text-[#64748B]">Records in demo</th>
+                <th scope="col" className="px-4 py-3 text-left text-xs font-semibold uppercase tracking-widest text-[#64748B]">Used in demo</th>
+              </tr>
+            </thead>
+            <tbody className="divide-y divide-[#E2E8F0]">
+              <tr>
+                <td className="px-4 py-3 font-bold text-[#15803D]">Tier A</td>
+                <td className="px-4 py-3 text-[#1A1A2E]">Public authoritative BIS sources</td>
+                <td className="px-4 py-3 text-[#64748B]">2 standard records + 5 lab records (OFFICIAL_BIS, PUBLIC_BIS_LIMS)</td>
+                <td className="px-4 py-3"><span className="inline-block text-xs font-bold px-2 py-0.5 rounded-full bg-[#DCFCE7] text-[#15803D]">Yes</span></td>
+              </tr>
+              <tr>
+                <td className="px-4 py-3 font-bold text-[#1D4ED8]">Tier B</td>
+                <td className="px-4 py-3 text-[#1A1A2E]">Authorized BIS data</td>
+                <td className="px-4 py-3 text-[#64748B]">None — requires authorized BIS API access</td>
+                <td className="px-4 py-3"><span className="inline-block text-xs font-bold px-2 py-0.5 rounded-full bg-[#F1F5F9] text-[#64748B]">Production only</span></td>
+              </tr>
+              <tr>
+                <td className="px-4 py-3 font-bold text-[#B45309]">Tier C</td>
+                <td className="px-4 py-3 text-[#1A1A2E]">Supporting external sources</td>
+                <td className="px-4 py-3 text-[#64748B]">None in this demo</td>
+                <td className="px-4 py-3"><span className="inline-block text-xs font-bold px-2 py-0.5 rounded-full bg-[#F1F5F9] text-[#64748B]">Production only</span></td>
+              </tr>
+              <tr>
+                <td className="px-4 py-3 font-bold text-[#64748B]">Tier D</td>
+                <td className="px-4 py-3 text-[#1A1A2E]">Synthetic / demo data</td>
+                <td className="px-4 py-3 text-[#64748B]">1 mock verification record + 1 synthetic test record (MOCK, SYNTHETIC)</td>
+                <td className="px-4 py-3"><span className="inline-block text-xs font-bold px-2 py-0.5 rounded-full bg-[#FEF9C3] text-[#854D0E]">Demo labelled</span></td>
+              </tr>
+            </tbody>
+          </table>
+        </div>
+      </section>
+
+      {/* G.2 — Freshness metadata table */}
+      <section className="mb-10" aria-labelledby="section-freshness-table">
+        <h2 id="section-freshness-table" className="text-xl font-semibold text-[#1B2A4A] mb-4">
+          Record Freshness &amp; Version Metadata
+        </h2>
+        <p className="text-sm text-slate-500 mb-4">
+          All records carry retrieval date, version/revision, and current status metadata.
+        </p>
+        <div className="rounded-lg border border-[#E2E8F0] overflow-x-auto">
+          <table className="w-full text-xs">
+            <thead className="bg-[#F8F9FA]">
+              <tr>
+                <th scope="col" className="px-3 py-2.5 text-left font-semibold uppercase tracking-widest text-[#64748B]">Record ID</th>
+                <th scope="col" className="px-3 py-2.5 text-left font-semibold uppercase tracking-widest text-[#64748B]">Source type</th>
+                <th scope="col" className="px-3 py-2.5 text-left font-semibold uppercase tracking-widest text-[#64748B]">Retrieved</th>
+                <th scope="col" className="px-3 py-2.5 text-left font-semibold uppercase tracking-widest text-[#64748B]">Revision / year</th>
+                <th scope="col" className="px-3 py-2.5 text-left font-semibold uppercase tracking-widest text-[#64748B]">Status</th>
+              </tr>
+            </thead>
+            <tbody className="divide-y divide-[#F1F5F9]">
+              {evidenceRecords.map((r) => (
+                <tr key={r.id} className="hover:bg-[#F8FAFC]">
+                  <td className="px-3 py-2 font-mono text-[#1B2A4A]">{r.id}</td>
+                  <td className="px-3 py-2 text-[#64748B]">{r.sourceType}</td>
+                  <td className="px-3 py-2 text-[#64748B]">{r.retrievedAt}</td>
+                  <td className="px-3 py-2 text-[#64748B]">{r.versionOrRevision}</td>
+                  <td className="px-3 py-2">
+                    {r.sourceType === 'OFFICIAL_BIS' && r.versionOrRevision.includes('superseded') ? (
+                      <span className="inline-block text-[10px] font-bold px-1.5 py-0.5 rounded bg-[#FEF9C3] text-[#854D0E]">Superseded</span>
+                    ) : r.sourceType === 'MOCK' || r.sourceType === 'SYNTHETIC' ? (
+                      <span className="inline-block text-[10px] font-bold px-1.5 py-0.5 rounded bg-[#FEE2E2] text-[#B91C1C]">Demo only</span>
+                    ) : (
+                      <span className="inline-block text-[10px] font-bold px-1.5 py-0.5 rounded bg-[#DCFCE7] text-[#15803D]">Current</span>
+                    )}
+                  </td>
+                </tr>
+              ))}
+            </tbody>
+          </table>
+        </div>
+      </section>
 
       {/* ──────────────────────────────────────────────────────────────────── */}
       {/* SECTION 1: Standards                                                  */}

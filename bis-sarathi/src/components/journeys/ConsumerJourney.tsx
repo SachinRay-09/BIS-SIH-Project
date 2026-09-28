@@ -15,6 +15,7 @@ import Link from 'next/link'
 import { responses } from '@/data/responses'
 import { evidenceRecords } from '@/data/evidence'
 import { EvidenceCard } from '@/components/cards/EvidenceCard'
+import { VerifyISIEntry } from '@/components/VerifyISIEntry'
 
 // ─────────────────────────────────────────────────────────────────────────────
 // Resolve response data at module load time (server component — synchronous)
@@ -178,13 +179,54 @@ export function ConsumerJourney() {
         </div>
       </section>
 
-      {/* ── Section 3: Evidence records ──────────────────────────────────── */}
+      {/* ── F.2 — What the ISI mark means for you ───────────────────────── */}
+      <section aria-labelledby="section-isi-meaning-heading">
+        <div className="flex flex-col gap-4">
+          <div className="flex items-center gap-2">
+            <span className="inline-flex items-center justify-center w-6 h-6 rounded-full bg-[#1B2A4A] text-white text-xs font-bold">3</span>
+            <h2 id="section-isi-meaning-heading" className="text-base font-semibold text-[#1B2A4A]">
+              What the ISI mark means for you
+            </h2>
+          </div>
+          <div className="grid grid-cols-1 sm:grid-cols-3 gap-3">
+            {[
+              { icon: '✅', title: 'Minimum safety standards met', body: 'The product has been tested and certified to meet BIS quality and safety requirements under the applicable Indian Standard.' },
+              { icon: '🏛️', title: 'Manufacturer is BIS-licensed', body: 'The manufacturer holds a valid BIS licence and is authorised to use the ISI mark on this product category.' },
+              { icon: '📢', title: "You can complain if quality doesn't match", body: 'If a product carrying the ISI mark does not meet the standards, you have the right to raise a complaint through the official BIS Care channel.' },
+            ].map((item) => (
+              <div key={item.title} className="bg-white border border-[#E2E8F0] rounded-lg p-4 flex flex-col gap-2">
+                <span className="text-xl" aria-hidden="true">{item.icon}</span>
+                <p className="text-sm font-semibold text-[#1B2A4A]">{item.title}</p>
+                <p className="text-xs text-[#64748B] leading-relaxed">{item.body}</p>
+              </div>
+            ))}
+          </div>
+        </div>
+      </section>
+
+      {/* ── F.1 — Verify ISI mark entry ──────────────────────────────────── */}
+      <section aria-labelledby="section-verify-heading">
+        <div className="flex flex-col gap-4 bg-white border border-[#E2E8F0] rounded-lg p-5">
+          <div className="flex items-center gap-2">
+            <span className="inline-flex items-center justify-center w-6 h-6 rounded-full bg-[#1B2A4A] text-white text-xs font-bold">4</span>
+            <h2 id="section-verify-heading" className="text-base font-semibold text-[#1B2A4A]">
+              Verify an ISI mark or licence number
+            </h2>
+          </div>
+          <p className="text-sm text-[#64748B]">
+            Enter a licence number or HUID to check it against the demo verification records. In production, this would query the official BIS licence registry.
+          </p>
+          <VerifyISIEntry />
+        </div>
+      </section>
+
+      {/* ── Section 5: Evidence records ──────────────────────────────────── */}
       {resolvedEvidenceCards.length > 0 && (
         <section aria-labelledby="section-evidence-heading">
           <div className="flex flex-col gap-4">
             <div className="flex items-center gap-2">
               <span className="inline-flex items-center justify-center w-6 h-6 rounded-full bg-[#1B2A4A] text-white text-xs font-bold">
-                3
+                5
               </span>
               <h2
                 id="section-evidence-heading"

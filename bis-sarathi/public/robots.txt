@@ -1,0 +1,4 @@
+User-agent: *
+Allow: /
+
+Sitemap: https://bis-sarathi.vercel.app/sitemap.xml

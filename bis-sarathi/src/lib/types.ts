@@ -294,6 +294,18 @@ export interface CandidateStandard {
   versionNotes: string
   /** Reasons this standard was surfaced for the user's query */
   matchReasons: string[]
+  /**
+   * Applicability status from the evidence pipeline.
+   * - "verified"   — confirmed match with evidence (e.g. exact product-category + CRS mandatory)
+   * - "candidate"  — semantically similar; requires further verification before acting on it
+   * - "uncertain"  — weak match or conflicting signals; treat with caution
+   */
+  applicabilityStatus?: 'verified' | 'candidate' | 'uncertain'
+  /**
+   * Clarifications the system still needs before the recommendation can be fully grounded.
+   * Rendered as a "What I still need" section on the card.
+   */
+  clarificationsNeeded?: string[]
 }
 
 // ─────────────────────────────────────────────────────────────────────────────
