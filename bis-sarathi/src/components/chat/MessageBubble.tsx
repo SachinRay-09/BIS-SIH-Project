@@ -219,9 +219,28 @@ const MessageBubble = forwardRef<HTMLDivElement, MessageBubbleProps>(
           tabIndex={-1}
         >
           {/* ── Sarathi label ──────────────────────────────────────────────── */}
-          <span className="text-[10px] font-semibold uppercase tracking-widest text-[#64748B] mb-1.5 ml-1">
-            Sarathi
-          </span>
+          <div className="flex items-center gap-2 mb-1.5 ml-1">
+            <span className="text-[10px] font-semibold uppercase tracking-widest text-[#64748B]">
+              Sarathi
+            </span>
+            {pr?.serviceTrace && typeof pr.serviceTrace.confidenceScore === 'number' && (() => {
+              const score = pr.serviceTrace.confidenceScore
+              const isHigh   = score >= 80
+              const isMed    = score >= 50 && score < 80
+              const bgColor  = isHigh ? '#DCFCE7' : isMed ? '#FEF9C3' : '#FEE2E2'
+              const txtColor = isHigh ? '#15803D' : isMed ? '#854D0E' : '#B91C1C'
+              const label    = isHigh ? 'HIGH' : isMed ? 'MEDIUM' : 'LOW'
+              return (
+                <span
+                  style={{ backgroundColor: bgColor, color: txtColor }}
+                  className="inline-flex items-center gap-1 text-[10px] font-bold uppercase tracking-widest px-2 py-0.5 rounded-full"
+                  aria-label={`Confidence: ${label} (${score}/100)`}
+                >
+                  {label} · {score}%
+                </span>
+              )
+            })()}
+          </div>
 
           {/* ── Text bubble ───────────────────────────────────────────────── */}
           <div

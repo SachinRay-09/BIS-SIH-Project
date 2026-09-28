@@ -1,0 +1,23 @@
+{
+  "name": "BIS Sarathi",
+  "short_name": "BIS Sarathi",
+  "description": "AI-assisted BIS standards navigation — SIH 2026 concept demonstrator",
+  "icons": [
+    {
+      "src": "/icon-192.png",
+      "sizes": "192x192",
+      "type": "image/png",
+      "purpose": "any maskable"
+    },
+    {
+      "src": "/icon-512.png",
+      "sizes": "512x512",
+      "type": "image/png",
+      "purpose": "any maskable"
+    }
+  ],
+  "theme_color": "#1B2A4A",
+  "background_color": "#ffffff",
+  "display": "standalone",
+  "start_url": "/"
+}

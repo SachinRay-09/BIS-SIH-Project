@@ -9,7 +9,7 @@ export const metadata: Metadata = {
 
 export default function AskPage() {
   return (
-    <div className="flex flex-col h-[calc(100vh-8rem)] min-h-0">
+    <div className="flex flex-col h-full overflow-hidden">
       <ChatInterface />
     </div>
   )

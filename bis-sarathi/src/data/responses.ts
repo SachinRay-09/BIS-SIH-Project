@@ -74,6 +74,7 @@ const drinkingWaterServiceTrace: ServiceTrace = {
   ],
   evidenceStatus: 'Supported by available evidence',
   nextAction: 'View official BIS record for IS 14543',
+  confidenceScore: 92,
 }
 
 // ─────────────────────────────────────────────────────────────────────────────
@@ -90,6 +91,7 @@ const labsServiceTrace: ServiceTrace = {
   ],
   evidenceStatus: 'Supported by public BIS LIMS snapshot',
   nextAction: 'Verify current laboratory status on BIS LIMS before booking',
+  confidenceScore: 85,
 }
 
 // ─────────────────────────────────────────────────────────────────────────────
@@ -103,6 +105,7 @@ const whatIs14543ServiceTrace: ServiceTrace = {
   evidenceSources: ['BIS Standards Catalogue (bis.gov.in)'],
   evidenceStatus: 'Supported by available evidence',
   nextAction: 'View official BIS record for IS 14543',
+  confidenceScore: 88,
 }
 
 // ─────────────────────────────────────────────────────────────────────────────
@@ -125,6 +128,7 @@ const complaintServiceTrace: ServiceTrace = {
   evidenceSources: ['BIS Care complaint guidance (bis.gov.in/bis-care)'],
   evidenceStatus: 'Fields partially extracted — 2 required fields missing',
   nextAction: 'Open official BIS Care complaint channel to submit',
+  confidenceScore: 71,
 }
 
 // ─────────────────────────────────────────────────────────────────────────────
@@ -149,6 +153,7 @@ const verificationServiceTrace: ServiceTrace = {
   evidenceSources: ['Demo Verification Record (Mock — not BIS production)'],
   evidenceStatus: 'Mock/demo record only — not verified against BIS production systems',
   nextAction: 'Visit official BIS portal to verify a real licence',
+  confidenceScore: 55,
 }
 
 // ─────────────────────────────────────────────────────────────────────────────
@@ -162,6 +167,7 @@ const abstentionServiceTrace: ServiceTrace = {
   evidenceSources: [],
   evidenceStatus: 'No supporting evidence available',
   nextAction: 'Visit official BIS portal for authoritative information',
+  confidenceScore: 0,
 }
 
 // ─────────────────────────────────────────────────────────────────────────────

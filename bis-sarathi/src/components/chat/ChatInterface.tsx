@@ -31,7 +31,7 @@ import {
   type FormEvent,
   type KeyboardEvent,
 } from 'react'
-import type { ChatMessage, ScenarioId } from '@/lib/types'
+import type { ChatMessage, PromptId, ScenarioId } from '@/lib/types'
 import { resolvePrompt, QUICK_PROMPTS } from '@/lib/promptRouter'
 import { responses } from '@/data/responses'
 import LoadingSequence from './LoadingSequence'
@@ -51,6 +51,12 @@ const SCENARIO_PROMPT_MAP: Record<ScenarioId, string> = {
   VERIFICATION: QUICK_PROMPTS.find((p) => p.id === 'PROMPT_VERIFY')!.prompt,
   COMPLAINT:    QUICK_PROMPTS.find((p) => p.id === 'PROMPT_COMPLAINT')!.prompt,
   TRUST_TEST:   QUICK_PROMPTS.find((p) => p.id === 'PROMPT_ABSTAIN')!.prompt,
+}
+
+// Scenarios that have a forced/pinned PromptId regardless of keyword matching.
+// TRUST_TEST must always resolve to PROMPT_ABSTAIN — the grounding gate demo.
+const SCENARIO_FORCED_PROMPT_ID: Partial<Record<ScenarioId, PromptId>> = {
+  TRUST_TEST: 'PROMPT_ABSTAIN',
 }
 
 // ─────────────────────────────────────────────────────────────────────────────
@@ -95,6 +101,7 @@ export default function ChatInterface() {
   const inputRef = useRef<HTMLInputElement>(null)
   const lastMessageRef = useRef<HTMLDivElement>(null)
   const pendingPromptRef = useRef<string | null>(null)
+  const pendingForcedPromptIdRef = useRef<PromptId | null>(null)
 
   // ── Focus the last message after it renders ──────────────────────────────
   useEffect(() => {
@@ -114,12 +121,13 @@ export default function ChatInterface() {
   // the LoadingSequence fully in charge of timing.
   // ─────────────────────────────────────────────────────────────────────────
 
-  const submitPrompt = useCallback((promptText: string) => {
+  const submitPrompt = useCallback((promptText: string, forcedPromptId?: PromptId) => {
     const trimmed = promptText.trim()
     if (!trimmed || isLoading) return
 
     // Store the prompt text so handleLoadingComplete can look it up
     pendingPromptRef.current = trimmed
+    pendingForcedPromptIdRef.current = forcedPromptId ?? null
 
     // Append user message
     const userMessage: ChatMessage = {
@@ -145,7 +153,9 @@ export default function ChatInterface() {
       return
     }
 
-    const promptId = resolvePrompt(promptText)
+    // Use forced PromptId if set (e.g. TRUST_TEST always → PROMPT_ABSTAIN),
+    // otherwise resolve from the prompt text via keyword matching.
+    const promptId = pendingForcedPromptIdRef.current ?? resolvePrompt(promptText)
     const promptResponse = responses[promptId]
 
     const assistantMessage: ChatMessage = {
@@ -158,6 +168,7 @@ export default function ChatInterface() {
 
     setMessages((prev) => [...prev, assistantMessage])
     pendingPromptRef.current = null
+    pendingForcedPromptIdRef.current = null
     setIsLoading(false)
   }, [])
 
@@ -208,7 +219,8 @@ export default function ChatInterface() {
     (id: ScenarioId) => {
       setActiveScenario(id)
       const promptText = SCENARIO_PROMPT_MAP[id]
-      submitPrompt(promptText)
+      const forcedPromptId = SCENARIO_FORCED_PROMPT_ID[id]
+      submitPrompt(promptText, forcedPromptId)
     },
     [submitPrompt]
   )

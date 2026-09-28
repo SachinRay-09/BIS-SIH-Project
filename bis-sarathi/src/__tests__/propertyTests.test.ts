@@ -324,6 +324,7 @@ describe('Property 8: Service trace toggle round-trip', () => {
       evidenceSources: ['Source A'],
       evidenceStatus: 'Supported',
       nextAction: 'Test next action',
+      confidenceScore: 90,
     }
 
     const user = userEvent.default.setup()

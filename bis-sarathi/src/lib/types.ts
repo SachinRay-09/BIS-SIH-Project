@@ -244,6 +244,12 @@ export interface ServiceTrace {
   evidenceStatus: string
   /** Recommended next action for the user, e.g. "View official BIS record for IS 14543" */
   nextAction: string
+  /**
+   * Confidence score for the response: 0–100.
+   * Reflects how well the query matched the available evidence.
+   * HIGH ≥ 80, MEDIUM 50–79, LOW < 50.
+   */
+  confidenceScore: number
 }
 
 // ─────────────────────────────────────────────────────────────────────────────

@@ -107,6 +107,9 @@ export function ServiceTracePanel({ trace }: ServiceTracePanelProps) {
             <FieldRow label="Evidence Sources" value={trace.evidenceSources} />
             <FieldRow label="Evidence Status" value={trace.evidenceStatus} />
             <FieldRow label="Next Action" value={trace.nextAction} />
+            {'confidenceScore' in trace && typeof trace.confidenceScore === 'number' && (
+              <FieldRow label="Confidence Score" value={`${trace.confidenceScore}/100`} />
+            )}
           </dl>
 
           {/* Supplementary note */}

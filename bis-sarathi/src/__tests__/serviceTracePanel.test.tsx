@@ -31,6 +31,7 @@ const FIXTURE_TRACE: ServiceTrace = {
   evidenceSources: ['BIS Standards Catalogue (bis.gov.in)', 'BIS LIMS snapshot'],
   evidenceStatus: 'Supported by available evidence',
   nextAction: 'View official BIS record for IS 14543',
+  confidenceScore: 92,
 }
 
 // ─────────────────────────────────────────────────────────────────────────────
